@@ -4,6 +4,6 @@
 <!-- 命名空间mapper：com.model.professional -->
 <mapper namespace="com.com.dao.mysql.HTO_UPDATE_ACCOUNT_DAO">
     <!--<select id="queryAll" resultType="HTO_UPDATE_ACCOUNT">-->
-        <!--select * from HTO_UPDATE_ACCOUNT-->
+    <!--select * from HTO_UPDATE_ACCOUNT-->
     <!--</select>-->
 </mapper>

@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 命名空间mapper：com.model.professional -->
-<mapper namespace="com.com.dao.mysql.HTO_UPDATE_ACCOUNT_DAO">
-    <!--<select id="queryAll" resultType="HTO_UPDATE_ACCOUNT">-->
-        <!--select * from HTO_UPDATE_ACCOUNT-->
-    <!--</select>-->
+<mapper namespace="com.dao.mysql.TCSL_DAO_htOrder">
+    <select id="queryAll" resultType="com.vo.TCSL_VO_htOrder">
+        select * from pho_ht_order
+    </select>
 </mapper>

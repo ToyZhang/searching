@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间mapper：com.model.professional -->
+<mapper namespace="com.dao.oracle.TCSL_DAO_ORACLE_Shop">
+    <select id="queryNameById" resultType="com.vo.TCSL_VO_Shop">
+        SELECT
+            NAME,
+            CODE
+        FROM
+            pho_mc_o2o
+        WHERE
+            CODE IN
+        <foreach collection="list" item="item" index="index" open="(" close=")"
+                 separator="," >
+            #{item}
+        </foreach>
+    </select>
+</mapper>

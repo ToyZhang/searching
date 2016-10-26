@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <title>酒店管理直通车</title>
+	    <meta name="description" content="商户列表">
+	    <meta name="keywords" content="index">
+	    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	    <meta name="renderer" content="webkit">
+	    <meta http-equiv="Cache-Control" content="no-siteapp" />
+	    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+	    <link rel="icon" type="image/png" href="../api/AmazeUI/i/favicon.png">
+	    <link rel="apple-touch-icon-precomposed" href="../api/AmazeUI/i/app-icon72x72@2x.png">
+	    <link rel="stylesheet" href="../api/AmazeUI/css/amazeui.min.css" />
+	    <link rel="stylesheet" href="../api/AmazeUI/css/admin.css">
+	    <script src="../api/AmazeUI/js/jquery.min.js"></script>
+	    <script src="../api/Echart/dist/echarts.js"></script>	    
+	    <script src="../js/WfrmHotelList.js"></script>
+	    <script src="../js/common.js"></script>
+		<script src="../js/resource.js"></script>
+	    <!--[if lt IE 9]>
+	    <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+	    <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+	    <script src="assets/js/polyfill/rem.min.js"></script>
+	    <script src="assets/js/polyfill/respond.min.js"></script>
+	    <script src="assets/js/amazeui.legacy.js"></script>
+	    <![endif]-->
+	    <!--[if (gte IE 9)|!(IE)]><!-->
+	    <script src="../api/AmazeUI/js/jquery.min.js"></script>
+	    <script src="../api/AmazeUI/js/amazeui.min.js"></script>
+	    <!--<![endif]-->
+	    <script src="../api/AmazeUI/js/app.js"></script>
+	</head>
+	<body>
+		<header data-am-widget="header" class="am-header am-header-default">
+			<h1 class="am-header-title">
+	    		<a href="#title-link" class="">商户列表</a>
+	  		</h1>
+			<div class="am-header-left am-header-nav">
+				<a href="#left-link" class="">
+					<i class="am-icon-refresh  am-header-icon" onclick="onclick_refresh()"></i>
+				</a>
+			</div>
+		</header>
+		<div class="am-g">
+        <ul class="am-list am-text-center" id="shopList">
+            <li><a onclick= onclick_goShop('shopId') href='#'>天财大酒店</a></li>
+        </ul>
+    </div>
+	</body>
+</html>
