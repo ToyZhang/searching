@@ -28,3 +28,29 @@ function getRequestPath(){
     }
     return requestPath;
 }
+/**
+ * 保存cookie
+ * @param name
+ * @param value
+ * @returns {boolean}
+ */
+function  saveCookie(name,value) {
+	document.cookie = name + '=' +encodeURIComponent(value);
+	return true;
+}
+/**
+ * 获取cookie中指定参数
+ * @param cookieName
+ * @returns value
+ */
+function getCookie(cookieName) {
+	var strCookie = document.cookie;
+	var arrCookie = strCookie.split("; ");
+	for(var i = 0; i < arrCookie.length; i++){
+		var arr = arrCookie[i].split("=");
+		if(cookieName == arr[0]){
+			return decodeURIComponent(arr[1]);
+		}
+	}
+	return "";
+}

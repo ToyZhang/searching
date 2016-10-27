@@ -5,6 +5,7 @@ import com.vo.TCSL_VO_Result;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ public class TCSL_REST_HotelList {
     TCSL_BO_HotelList boHotelList;
 
     @RequestMapping("/queryNameById")
+    @ResponseBody
     public TCSL_VO_Result queryNameById(HttpServletRequest request, HttpServletResponse response,
                                         @RequestParam(value = "shopIds[]",required = false,defaultValue = "") String[] ids){
         List<String> shopIds = Arrays.asList(ids);

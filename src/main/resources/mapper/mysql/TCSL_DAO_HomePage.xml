@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间mapper：com.model.professional -->
+<mapper namespace="com.dao.mysql.TCSL_DAO_HomePage">
+    <select id="queryBussPrice" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            cName NAME,
+            SUM(mMoney) PRICE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+            cID = '1-1'
+        AND dtYyr = #{DATE}
+        AND shopid = #{SHOPID}
+        GROUP BY
+            cname
+    </select>
+    <select id="queryAvgPrice" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            avg(mMoney) AVGPRICE
+        FROM
+            HTO_UPDATE_BUSSDATA b
+        WHERE
+            b.dtYyr = #{DATE}
+        AND shopid = #{SHOPID}
+        AND cName = '平均房价'
+    </select>
+    <select id="queryCheckInPercent" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            MMONEY
+        FROM
+            HTO_UPDATE_BUSSDATA b
+        WHERE
+            b.dtYyr = #{DATE}
+        AND shopid = #{SHOPID}
+        AND cName = '房间出租率'
+    </select>
+</mapper>
