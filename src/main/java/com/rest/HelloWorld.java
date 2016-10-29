@@ -1,7 +1,7 @@
 package com.rest;
 
 import com.dao.mysql.TCSL_DAO_htOrder;
-import net.sf.json.JSONArray;
+import com.vo.TCSL_VO_Result;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,8 +21,8 @@ public class HelloWorld {
 
     @RequestMapping("/hello")
     @ResponseBody
-    public JSONArray helloWorld(HttpServletRequest request, HttpServletResponse response){
-        JSONArray result = JSONArray.fromObject(daoHtOrder.queryAll());
+    public TCSL_VO_Result helloWorld(HttpServletRequest request, HttpServletResponse response){
+        TCSL_VO_Result result = new TCSL_VO_Result();
         return result;
     }
 

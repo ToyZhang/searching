@@ -1,4 +1,5 @@
 $(function(){
+	window.parent.showCanlender();
     $('#menuTitle', window.parent.document).html("首页");
     //初始化营业时间
     var startDate = new Date().toLocaleDateString();
@@ -37,8 +38,11 @@ function init(date){
             	var avgPrice = content.avgprice;
             	var checkInPercent = content.mmoney;
             	$("#myAllYYE").html(price);
+            	var dateList = content.dateList;
+            	var priceList = content.priceList;
             	createAvgPriceItem(avgPrice);
             	createCheckInPercent(checkInPercent);
+            	createPriceTrend(dateList,priceList);
             	
             }
         },
@@ -152,9 +156,11 @@ function createAvgPriceItem(avgPrice){
 						data: [avgPrice]
 					}]
 				};
-				loadingTicket = setTimeout(function() {						
-					myChartpingjunfangjia.hideLoading();						
-					myChartpingjunfangjia.setOption(optionpingjunfangjia);
+				loadingTicket = setTimeout(function() {
+					if(myChartpingjunfangjia != null){
+						myChartpingjunfangjia.hideLoading();
+						myChartpingjunfangjia.setOption(optionpingjunfangjia);
+					}
 				}, 10);
 			}
 		);
@@ -257,6 +263,97 @@ function createCheckInPercent(checkInPercent){
 			}, 10);
 		}
 	);
+}
+/**
+ * 创建营业走势图形
+ * @param {Object} dateList
+ * @param {Object} priceList
+ */
+function createPriceTrend(dateList,priceList){
+	// 路径配置
+    require.config({
+        paths: {
+            echarts: '../api/Echart/dist'
+        }
+    });
+    require(
+    	[
+			'echarts',
+			'echarts/chart/pie',
+			'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+		],
+		function (ec){
+			// 营业收入趋势图
+		    var myChart = ec.init(document.getElementById('shouru'));
+		    myChart.showLoading({
+		        text: '加载中...',
+		        effect: 'ring',
+		        textStyle: {
+		            fontSize: 15
+		        }
+		    });
+		    var option = {
+		    	 grid: {
+		            x: 43,
+		            x2: 1,
+		            height: 250,
+		            y: 40
+		        },
+		        title: {
+		            text: '营业收入趋势',
+		            textStyle: {
+		                color: 'rgba(30,144,255,0.8)',
+		                fontFamily: '微软雅黑',
+		                fontSize: 20,
+		                fontWeight: 'bolder'
+		            }
+		        },
+		        tooltip: {
+					           
+		        },
+		        calculable: false,
+		        xAxis: [{
+
+                    show: true,
+		            type: 'category',
+		            data: dateList,
+                     splitLine: {
+		                show: false
+		            },
+		            axisLabel: {
+		                show: true
+		            }
+		        }],
+		        yAxis: [{
+                    show: true,
+		            type: 'value',
+                    splitLine: {
+		                show: false
+		            },
+		        }],
+		        series: [{
+		            name: '营业收入',
+		            type: 'bar',
+		            itemStyle: {
+		                normal: {
+		                    color: '#87cefa',
+		                    barBorderRadius: [5, 5, 5, 5]
+		                },
+		                emphasis: {
+		                    color: '#87cefa',
+		                    barBorderRadius: [5, 5, 5, 5]
+		                }
+		            },
+		            data: priceList
+		        }]
+		    };
+		    loadingTicket = setTimeout(function () {
+		        myChart.hideLoading();
+		        // 为echarts对象加载数据
+		        myChart.setOption(option);
+		    }, 10);
+		}
+    );
 }
 /**
  * 刷新页面

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -53,6 +54,18 @@ public class TCSL_BO_HomePage {
             String percentStr = String.valueOf(percent * 100);
             businessData.setMMONEY(percentStr);
         }
+        //查询一周营业趋势
+        List<TCSL_VO_BusinessData> list = daoHomePage.queryBussPriceByWeek(shopId,date);
+        List<String> dateList = new ArrayList<String>();
+        List<BigDecimal> bussPriceList = new ArrayList<BigDecimal>();
+        for(int i=0; i<list.size(); i++) {
+            String bussDate = list.get(i).getDATE();
+            BigDecimal bussPrice = list.get(i).getPRICE();
+            dateList.add(bussDate);
+            bussPriceList.add(bussPrice);
+        }
+        businessData.setDateList(dateList);
+        businessData.setPriceList(bussPriceList);
         result.setRet(0);
         result.setContent(businessData);
         return result;

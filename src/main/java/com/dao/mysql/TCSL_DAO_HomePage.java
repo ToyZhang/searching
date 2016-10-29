@@ -18,7 +18,11 @@ public interface TCSL_DAO_HomePage {
         @Param("DATE") String date
     );
     TCSL_VO_BusinessData queryCheckInPercent(
-            @Param("SHOPID") String shopId,
-            @Param("DATE") String date
+        @Param("SHOPID") String shopId,
+        @Param("DATE") String date
+    );
+    List<TCSL_VO_BusinessData> queryBussPriceByWeek(
+        @Param("SHOPID") String shopId,
+        @Param("DATE") String date
     );
 }

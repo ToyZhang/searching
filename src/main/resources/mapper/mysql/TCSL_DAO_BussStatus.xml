@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间mapper：com.model.professional -->
+<mapper namespace="com.dao.mysql.TCSL_DAO_BussStatus">
+    <select id="queryBussParam" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            cName NAME,
+            SUM(mMoney) PRICE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+            cID = #{CID}
+        AND dtYyr BETWEEN #{STARTDATE}
+        AND #{ENDDATE}
+        AND shopid = #{SHOPID}
+        GROUP BY
+            cname
+    </select>
+    <select id="querySaleRoomNum" resultType="BigDecimal">
+        SELECT
+            SUM(mmoney) NUM
+        FROM
+            HTO_UPDATE_BUSSDATA b
+        WHERE
+            b.dtYyr BETWEEN #{STARTDATE}
+        AND #{ENDDATE}
+        AND shopid = #{SHOPID}
+        AND cgroup = 'RENT'
+    </select>
+    <select id="queryAvgRoomPrice" resultType="BigDecimal">
+        SELECT
+            avg(mMoney) PRICE
+        FROM
+            HTO_UPDATE_BUSSDATA b
+        WHERE
+            b.dtYyr BETWEEN #{STARTDATE}
+        AND #{ENDDATE}
+        AND shopid = #{SHOPID}
+        AND cName = '平均房价'
+    </select>
+    <select id="queryCheckInNum" resultType="BigDecimal">
+        SELECT
+            SUM(MMONEY) NUM
+        FROM
+            HTO_UPDATE_BUSSDATA b
+        WHERE
+            b.dtYyr BETWEEN #{STARTDATE}
+        AND #{ENDDATE}
+        AND shopid = #{SHOPID}
+        AND CGROUP = 'RENT'
+        GROUP BY
+            DTYYR
+    </select>
+    <select id="queryCheckInPercent" resultType="BigDecimal">
+        SELECT
+            mMoney
+        FROM
+            HTO_UPDATE_BUSSDATA b
+        WHERE
+            b.dtYyr BETWEEN #{STARTDATE}
+        AND #{ENDDATE}
+        AND shopid = #{SHOPID}
+        AND cName = '房间出租率'
+    </select>
+</mapper>

@@ -1,7 +1,4 @@
-$(function(){
-    $('#my-start').datepicker().on('changeDate.datepicker.amui', function (event) {
-        onclick_date();
-    });
+$(function(){ 
     onclick_btnHomePage();
 })
 /**
@@ -22,6 +19,9 @@ function onclick_date() {
  * 主页 点击事件
  */
 function onclick_btnHomePage() {
+	$('#my-start').datepicker().on('changeDate.datepicker.amui', function (event) {
+        onclick_date();
+    });
     var src = "../templates/WfrmHomePage.html";
     window.open(src,'displayContent');
 }
@@ -29,7 +29,8 @@ function onclick_btnHomePage() {
  * 营业情况汇总 点击事件
  */
 function  onclick_btnBusStatus() {
-    console.info("点击营业数据汇总");
+    var src = "../templates/WfrmBussStatus.html";
+    window.open(src,'displayContent');
 }
 /**
  * 营业指标走势 点击事件
@@ -72,5 +73,11 @@ function onclick_btnOrderStatus() {
  */
 function onclick_btnAbout() {
     console.info("关于 点击事件");
+}
+function showCanlender(){
+	$("#my-start").show();
+}
+function hideCanlender(){
+	$("#my-start").hide();
 }
 

@@ -54,3 +54,11 @@ function getCookie(cookieName) {
 	}
 	return "";
 }
+/**
+ * 日期格式化 YYYY-MM-DD
+ * @param {Object} strTime
+ */
+function dateFormat(strTime){
+	var date = new Date(strTime);
+    return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+}

@@ -36,4 +36,18 @@
         AND shopid = #{SHOPID}
         AND cName = '房间出租率'
     </select>
+    <select id="queryBussPriceByWeek" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            SUM(mMoney) PRICE,
+            DTYYR DATE
+        FROM
+          HTO_UPDATE_BUSSDATA
+        WHERE
+          cID = '1-1'
+        AND shopid = #{SHOPID}
+        AND DTYYR &lt;= #{DATE}
+        GROUP BY
+            DTYYR DESC
+            LIMIT 0,7
+    </select>
 </mapper>
