@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间mapper：com.model.professional -->
+<mapper namespace="com.dao.mysql.TCSL_DAO_BITrend">
+    <select id="queryBussData" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+        SUM(mMoney) PRICE,
+        DTYYR DATE
+        FROM
+        HTO_UPDATE_BUSSDATA
+        WHERE
+        cID = '1-1'
+        AND
+        shopid = #{SHOPID}
+        AND
+        DTYYR &lt;= #{DTYYR}
+        GROUP BY
+        DTYYR DESC
+        LIMIT 0,
+        #{SCOPE}
+    </select>
+    <select id="queryAvgRoomPrice" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+        SUM(mMoney) PRICE,
+        DTYYR DATE
+        FROM
+        HTO_UPDATE_BUSSDATA
+        WHERE
+        cName = '平均房价'
+        AND shopid = #{SHOPID}
+        AND DTYYR &lt;= #{DTYYR}
+        GROUP BY
+        DTYYR DESC
+        LIMIT 0,
+        #{SCOPE}
+    </select>
+    <select id="querySaleRoomNum" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+        SUM(mMoney) PRICE,
+        DTYYR DATE
+        FROM
+        HTO_UPDATE_BUSSDATA
+        WHERE
+        cgroup = 'RENT'
+        AND shopid = #{SHOPID}
+        AND DTYYR &lt;= #{DTYYR}
+        GROUP BY
+        DTYYR DESC
+        LIMIT 0,
+        #{SCOPE}
+    </select>
+</mapper>

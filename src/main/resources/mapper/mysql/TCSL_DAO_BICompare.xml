@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间mapper：com.model.professional -->
+<mapper namespace="com.dao.mysql.TCSL_DAO_BICompare">
+    <select id="queryBussVolumeByDayLast" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            SUM(mMoney) PRICE,
+            DTYYR DATE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+            shopid = #{SHOPID}
+        AND CID = '1-1'
+        AND TO_DAYS(#{DATE}) - TO_DAYS(DTYYR) = 1
+    </select>
+    <select id="queryBussVolumeByDay" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            SUM(mMoney) PRICE,
+            DTYYR DATE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+          shopid = #{SHOPID}
+        AND CID = '1-1'
+        AND DTYYR = #{DATE}
+    </select>
+    <select id="queryBussVolumeByWeekLast" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+        SUM(mMoney) PRICE,
+        DTYYR DATE
+        FROM
+        HTO_UPDATE_BUSSDATA
+        WHERE
+        DTYYR >= date_add(
+        #{DATE},
+        INTERVAL - (8 + weekday(#{DATE})) DAY
+        )
+        AND DTYYR &lt;= date_add(
+        #{DATE},
+        INTERVAL - (1 + weekday(#{DATE})) DAY
+        )
+        AND shopid = #{SHOPID}
+        AND CID = '1-1'
+    </select>
+    <select id="queryBussVolumeByWeek" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            SUM(mMoney) PRICE,
+            DTYYR DATE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+            WEEKOFYEAR(DTYYR) = WEEKOFYEAR(#{DATE})
+        AND shopid = #{SHOPID}
+        AND CID = '1-1'
+    </select>
+    <select id="queryBussVolumeByMonthLast" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+        SUM(mMoney) PRICE,
+        DTYYR DATE
+        FROM
+        HTO_UPDATE_BUSSDATA
+        WHERE
+        DTYYR &lt;= last_day(
+        date_add(#{DATE}, INTERVAL - 1 MONTH)
+        )
+        AND DTYYR >= DATE_FORMAT(
+        concat(
+        extract(
+        YEAR_MONTH
+        FROM
+        date_add(#{DATE}, INTERVAL - 1 MONTH)
+        ),
+        '01'
+        ),
+        '%Y-%m-%d'
+        )
+        AND shopid =#{SHOPID}
+        AND CID = '1-1'
+    </select>
+    <select id="queryBussVolumeByMonth" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            SUM(mMoney) PRICE,
+            DTYYR DATE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+            MONTH (DTYYR) = MONTH (#{DATE})
+        AND shopid =#{SHOPID}
+        AND CID = '1-1'
+    </select>
+    <select id="queryBussVolumeByQuarterLast" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            SUM(mMoney) PRICE,
+            DTYYR DATE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+            QUARTER (DTYYR) = QUARTER (
+                DATE_SUB(#{DATE}, INTERVAL 1 QUARTER)
+            )
+        AND shopid = #{SHOPID}
+        AND CID = '1-1'
+    </select>
+    <select id="queryBussVolumeByQuarter" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            SUM(mMoney) PRICE,
+            DTYYR DATE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+            QUARTER (DTYYR) = QUARTER (#{DATE})
+        AND shopid = #{SHOPID}
+        AND CID = '1-1'
+    </select>
+    <select id="queryBussVolumeByYearLast" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            SUM(mMoney) PRICE,
+            DTYYR DATE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+            YEAR (DTYYR) = YEAR (
+                DATE_SUB(#{DATE}, INTERVAL 1 YEAR)
+            )
+        AND shopid = #{SHOPID}
+        AND CID = '1-1'
+    </select>
+    <select id="queryBussVolumeByYear" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            SUM(mMoney) PRICE,
+            DTYYR DATE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+            YEAR (DTYYR) = YEAR (#{DATE})
+        AND shopid = #{SHOPID}
+        AND CID = '1-1'
+    </select>
+    <select id="queryAvgRoomPriceByDayLast" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            avg(mMoney) PRICE,
+            DTYYR DATE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+            shopid = #{SHOPID}
+        AND cName = '平均房价'
+        AND TO_DAYS(#{DATE}) - TO_DAYS(DTYYR) = 1
+    </select>
+    <select id="queryAvgRoomPriceByDay" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            avg(mMoney) PRICE,
+            DTYYR DATE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+            shopid = #{SHOPID}
+        AND cName = '平均房价'
+        AND DTYYR = #{DATE}
+    </select>
+    <select id="queryAvgRoomPriceByWeekLast" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+        avg(mMoney) PRICE,
+        DTYYR DATE
+        FROM
+        HTO_UPDATE_BUSSDATA
+        WHERE
+        DTYYR >= date_add(
+        #{DATE},
+        INTERVAL - (8 + weekday(#{DATE})) DAY
+        )
+        AND DTYYR &lt;= date_add(
+        #{DATE},
+        INTERVAL - (1 + weekday(#{DATE})) DAY
+        )
+        AND shopid = #{SHOPID}
+        AND cName = '平均房价'
+    </select>
+    <select id="queryAvgRoomPriceByWeek" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            avg(mMoney) PRICE,
+            DTYYR DATE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+            WEEKOFYEAR(DTYYR) = WEEKOFYEAR(#{DATE})
+        AND shopid = #{SHOPID}
+        AND cName = '平均房价'
+    </select>
+    <select id="queryAvgRoomPriceByMonthLast" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+        avg(mMoney) PRICE,
+        DTYYR DATE
+        FROM
+        HTO_UPDATE_BUSSDATA
+        WHERE
+        DTYYR &lt;= last_day(
+        date_add(#{DATE}, INTERVAL - 1 MONTH)
+        )
+        AND DTYYR >= DATE_FORMAT(
+        concat(
+        extract(
+        YEAR_MONTH
+        FROM
+        date_add(#{DATE}, INTERVAL - 1 MONTH)
+        ),
+        '01'
+        ),
+        '%Y-%m-%d'
+        )
+        AND shopid = #{SHOPID}
+        AND cName = '平均房价'
+    </select>
+    <select id="queryAvgRoomPriceByMonth" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            avg(mMoney) PRICE,
+            DTYYR DATE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+            MONTH (DTYYR) = MONTH (#{DATE})
+        AND shopid = #{SHOPID}
+        AND cName = '平均房价'
+    </select>
+    <select id="queryAvgRoomPriceByQuarterLast" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            avg(mMoney) PRICE,
+            DTYYR DATE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+            QUARTER (DTYYR) = QUARTER (
+                DATE_SUB(#{DATE}, INTERVAL 1 QUARTER)
+            )
+        AND shopid = #{SHOPID}
+        AND cName = '平均房价'
+    </select>
+    <select id="queryAvgRoomPriceByQuarter" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            avg(mMoney) PRICE,
+            DTYYR DATE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+            QUARTER (DTYYR) = QUARTER (#{DATE})
+        AND shopid = #{SHOPID}
+        AND cName = '平均房价'
+    </select>
+    <select id="queryAvgRoomPriceByYearLast" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            avg(mMoney) PRICE,
+            DTYYR DATE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+            YEAR (DTYYR) = YEAR (
+                DATE_SUB(#{DATE}, INTERVAL 1 YEAR)
+            )
+        AND shopid = #{SHOPID}
+        AND cName = '平均房价'
+    </select>
+    <select id="queryAvgRoomPriceByYear" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            avg(mMoney) PRICE,
+            DTYYR DATE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+            YEAR (DTYYR) = YEAR (#{DATE})
+        AND shopid = #{SHOPID}
+        AND cName = '平均房价'
+    </select>
+    <select id="querySaleRoomNumByDayLast" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            SUM(mMoney) PRICE,
+            DTYYR DATE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+            shopid =#{SHOPID}
+        AND cgroup = 'RENT'
+        AND TO_DAYS(#{DATE}) - TO_DAYS(DTYYR) = 1
+    </select>
+    <select id="querySaleRoomNumByDay" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            SUM(mMoney) PRICE,
+            DTYYR DATE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+            shopid =#{SHOPID}
+        AND cgroup = 'RENT'
+        AND DTYYR = #{DATE}
+    </select>
+    <select id="querySaleRoomNumByWeekLast" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+        SUM(mMoney) PRICE,
+        DTYYR DATE
+        FROM
+        HTO_UPDATE_BUSSDATA
+        WHERE
+        DTYYR >= date_add(
+        #{DATE},
+        INTERVAL - (8 + weekday(#{DATE})) DAY
+        )
+        AND DTYYR &lt;= date_add(
+        #{DATE},
+        INTERVAL - (1 + weekday(#{DATE})) DAY
+        )
+        AND shopid =#{SHOPID}
+        AND cgroup = 'RENT'
+    </select>
+    <select id="querySaleRoomNumByWeek" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            SUM(mMoney) PRICE,
+            DTYYR DATE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+            WEEKOFYEAR(DTYYR) = WEEKOFYEAR(#{DATE})
+        AND shopid =#{SHOPID}
+        AND cgroup = 'RENT'
+    </select>
+    <select id="querySaleRoomNumByMonthLast" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+        SUM(mMoney) PRICE,
+        DTYYR DATE
+        FROM
+        HTO_UPDATE_BUSSDATA
+        WHERE
+        DTYYR &lt;= last_day(
+        date_add(#{DATE}, INTERVAL - 1 MONTH)
+        )
+        AND DTYYR >= DATE_FORMAT(
+        concat(
+        extract(
+        YEAR_MONTH
+        FROM
+        date_add(#{DATE}, INTERVAL - 1 MONTH)
+        ),
+        '01'
+        ),
+        '%Y-%m-%d'
+        )
+        AND shopid =#{SHOPID}
+        AND cgroup = 'RENT'
+    </select>
+    <select id="querySaleRoomNumByMonth" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            SUM(mMoney) PRICE,
+            DTYYR DATE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+            MONTH (DTYYR) = MONTH (#{DATE})
+        AND shopid =#{SHOPID}
+        AND cgroup = 'RENT'
+    </select>
+    <select id="querySaleRoomNumByQuarterLast" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            SUM(mMoney) PRICE,
+            DTYYR DATE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+            QUARTER (DTYYR) = QUARTER (
+                DATE_SUB(#{DATE}, INTERVAL 1 QUARTER)
+            )
+        AND shopid =#{SHOPID}
+        AND cgroup = 'RENT'
+    </select>
+    <select id="querySaleRoomNumByQuarter" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            SUM(mMoney) PRICE,
+            DTYYR DATE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+            QUARTER (DTYYR) = QUARTER (#{DATE})
+        AND shopid =#{SHOPID}
+        AND cgroup = 'RENT'
+    </select>
+    <select id="querySaleRoomNumByYearLast" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            SUM(mMoney) PRICE,
+            DTYYR DATE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+            YEAR (DTYYR) = YEAR (
+                DATE_SUB(#{DATE}, INTERVAL 1 YEAR)
+            )
+        AND shopid =#{SHOPID}
+        AND cgroup = 'RENT'
+    </select>
+    <select id="querySaleRoomNumByYear" resultType="com.vo.TCSL_VO_BusinessData">
+        SELECT
+            SUM(mMoney) PRICE,
+            DTYYR DATE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+            YEAR (DTYYR) = YEAR (#{DATE})
+        AND shopid =#{SHOPID}
+        AND cgroup = 'RENT'
+    </select>
+
+
+</mapper>

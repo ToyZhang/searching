@@ -30,12 +30,16 @@ function getRequestPath(){
 }
 /**
  * 保存cookie
- * @param name
- * @param value
+ * @param name 变量名称
+ * @param value 变量值
+ * @param days 该cookie保存天数
  * @returns {boolean}
  */
-function  saveCookie(name,value) {
-	document.cookie = name + '=' +encodeURIComponent(value);
+function  saveCookie(name,value,days) {
+	var d = new Date();
+	d.setTime(d.getTime()+ (days * 24 * 60 * 60 * 1000));
+	var expires = "expires=" + d.toUTCString();
+	document.cookie = name + "=" +encodeURIComponent(value) + ";" + expires;
 	return true;
 }
 /**
@@ -53,6 +57,13 @@ function getCookie(cookieName) {
 		}
 	}
 	return "";
+}
+/**
+ * 清除cookie
+ * @param {Object} name 变量名称
+ */
+function removeCookie(name){
+	saveCookie(name,"",-1);
 }
 /**
  * 日期格式化 YYYY-MM-DD

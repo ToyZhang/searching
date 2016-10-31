@@ -5,7 +5,7 @@ $(function(){
 	if(shopIdStr.indexOf(",") > 0){ //一个微信号对应多个门店
 		shopIds = shopIdStr.split(",");
 	}else{ //一个微信号对应一个门店
-        saveCookie("shopId",shopIdStr);
+        saveCookie("shopId",shopIdStr,1);
         shopIds.push(shopIdStr);
 	}
 	init();
@@ -40,7 +40,7 @@ function init(){
             	}else if(length == 1){
             		var shopInfo = content[0];
             		var shopName = shopInfo.name;
-            		saveCookie("shopName",shopName);
+            		saveCookie("shopName",shopName,1);
             		window.location.href = "../templates/WfrmMain.html";
             	}
             	//绑定商户点击事件
@@ -85,7 +85,7 @@ function onclick_refresh(){
  * @param shopId 商户id
  */
 function onclick_goShop(shopId,shopName){
-    saveCookie("shopId",shopId);
-    saveCookie("shopName",shopName);
+    saveCookie("shopId",shopId,1);
+    saveCookie("shopName",shopName,1);
     window.location.href = "../templates/WfrmMain.html";
 }

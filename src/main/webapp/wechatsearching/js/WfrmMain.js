@@ -36,13 +36,15 @@ function  onclick_btnBusStatus() {
  * 营业指标走势 点击事件
  */
 function onclick_btnBITrend() {
-    console.info("点击营业指标数据");
+	var src = "../templates/WfrmBITrend.html";
+    window.open(src,'displayContent');
 }
 /**
  * 营业指标对比 点击事件
  */
 function onclick_btnBICompare() {
-    console.info("营业指标对比点击事件");
+	var src = "../templates/WfrmBICompare.html";
+    window.open(src,'displayContent');
 }
 /**
  * 实时房态 点击事件
