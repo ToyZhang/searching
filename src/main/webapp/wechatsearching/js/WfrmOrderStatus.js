@@ -24,7 +24,6 @@ function init(){
 //		beforeSend:function(){ },
         //成功返回后调用函数
         success:function(data){
-        	debugger;
             if(data.ret == 0){
             	var content = data.content;
             	var valueArr = [];
@@ -33,7 +32,13 @@ function init(){
             		var count = content[i].count;
             		var date = content[i].date;
             		valueArr.push(count);
+            		if(i == 0){
+            			dateArr.push("占位");
+            		}
             		dateArr.push(date);
+            		if(i == content.length-1){
+            			dateArr.push("占位");
+            		}
             	}
             	freshChart(valueArr,dateArr);
             }
@@ -72,6 +77,7 @@ function freshChart(value,date){
 			    var total = 0;
 			    var maxIndex;
 			    var dataArray = (function () {
+			    	debugger;
 			        var max = Math.max.apply(Math, data);
 			        var min = Math.min.apply(Math, data);
 			        gap = Math.round((max - min));
@@ -128,7 +134,7 @@ function freshChart(value,date){
 			            boundaryGap: [0, 0.5],
 			            show: false
 			        }],
-			        animation: false,
+			        animation: true,
 			        series: [{
 				            name: '预订量',
 				            type: 'line',
