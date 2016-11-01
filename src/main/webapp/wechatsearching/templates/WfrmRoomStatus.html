@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <title>酒店管理直通车</title>
+	    <meta name="description" content="实时房态">
+	    <meta name="keywords" content="index">
+	    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	    <meta name="renderer" content="webkit">
+	    <meta http-equiv="Cache-Control" content="no-siteapp" />
+	    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+	    <link rel="icon" type="image/png" href="../api/AmazeUI/i/favicon.png">
+	    <link rel="apple-touch-icon-precomposed" href="../api/AmazeUI/i/app-icon72x72@2x.png">
+	    <link rel="stylesheet" href="../api/AmazeUI/css/amazeui.min.css" />
+	    <link rel="stylesheet" href="../api/AmazeUI/css/admin.css">
+	    <script src="../api/AmazeUI/js/jquery.min.js"></script>
+	    <script src="../api/Echart/dist/echarts.js"></script>	    
+	    <script src="../js/WfrmRoomStatus.js"></script>
+	    <script src="../js/common.js"></script>
+		<script src="../js/resource.js"></script>
+	    <!--[if lt IE 9]>
+	    <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+	    <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+	    <script src="assets/js/polyfill/rem.min.js"></script>
+	    <script src="assets/js/polyfill/respond.min.js"></script>
+	    <script src="assets/js/amazeui.legacy.js"></script>
+	    <![endif]-->
+	    <!--[if (gte IE 9)|!(IE)]><!-->
+	    <script src="../api/AmazeUI/js/jquery.min.js"></script>
+	    <script src="../api/AmazeUI/js/amazeui.min.js"></script>
+	    <!--<![endif]-->
+	    <script src="../api/AmazeUI/js/app.js"></script>
+	    <style>
+	        .chart{
+	            height: 240px;
+	            margin: 0px;
+	            padding: 0px;
+	        }
+    </style>
+	</head>
+	<body>
+		<div class="am-g">
+	        <div class="am-panel-bd">
+	            <div class="am-g am-text-primary">
+	                <div class="am-u-sm-12">
+	                    <div id="pingjunfangjia" class="chart">
+	                    </div>
+	                </div>
+	            </div>
+	            <br>
+	            <br>
+	            <table class="am-table">
+	                <thead>
+	                    <tr id="tableTitle">
+	                        <th colspan="2" class="am-btn-success am-sm-only-text-center" id="cleanRoomCount">
+	                            <!--净/42-->
+	                        </th>
+	                        <th colspan="2" class="am-btn-default am-sm-only-text-center" id="dirtyRoomCount">
+	                            <!--脏/1-->
+	                        </th>
+	                        <th colspan="2" class="am-sm-only-text-center am-btn-danger" id="useRoomCount">
+	                            <!--占用/30-->
+	                        </th>
+	                        <th colspan="2" class="am-sm-only-text-center am-btn-primary" id="repairRoomCount">
+	                            <!--维修/37-->
+	                        </th>
+	                    </tr>
+	                </thead>
+	            </table>
+	            <hr>
+	            <table class="am-table" border="0 0 0 0" border="0 12 0 12" style="cellspacing: 10px;">
+	                <tbody id="table1">
+	                	<!--<tr class='am-sm-only-text-center' style='height: 35px;vertical-align:middle;margin:5px;padding:10px;'>
+	                		<td colspan='2' class='am-btn-danger  am-text-top' style='height: 35px;vertical-align:middle;border:2px solid;' 								name='单间' >
+	                				201
+	                		</td>
+	                	</tr>-->
+	                </tbody>
+	            </table>
+	        </div>
+    	</div>
+	</body>
+</html>

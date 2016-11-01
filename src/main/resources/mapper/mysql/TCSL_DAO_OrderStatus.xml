@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间mapper：com.model.professional -->
+<mapper namespace="com.dao.mysql.TCSL_DAO_OrderStatus">
+    <select id="queryById" resultType="com.vo.TCSL_VO_OrderNum">
+        SELECT
+            COUNT(orderid) COUNT,
+            dtorderdate DATE
+        FROM
+            PHO_HT_ORDER
+        WHERE
+            mcid = #{SHOPID}
+        AND STATEID = 0
+        GROUP BY
+            dtorderdate
+        ORDER BY
+            dtorderdate DESC
+        LIMIT 0,
+         5
+    </select>
+</mapper>

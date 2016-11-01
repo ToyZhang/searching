@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间mapper：com.model.professional -->
+<mapper namespace="com.dao.mysql.TCSL_DAO_EmployNum">
+    <select id="queryById" resultType="com.vo.TCSL_VO_RoomUseNum">
+        SELECT
+            COUNT(*) COUNT,
+            ROOMTYPE
+        FROM
+            HTO_UPDATE_ROOMSTATE
+        WHERE
+            RoomState = '占用'
+        AND ShopID = #{SHOPID}
+        GROUP BY
+            RoomType
+    </select>
+</mapper>

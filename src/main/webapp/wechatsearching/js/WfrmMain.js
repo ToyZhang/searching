@@ -50,25 +50,29 @@ function onclick_btnBICompare() {
  * 实时房态 点击事件
  */
 function onclick_btnRoomStatus() {
-    console.info("实时房态点击事件");
+	var src = "../templates/WfrmRoomStatus.html";
+    window.open(src,'displayContent');
 }
 /**
  * 占用数 点击事件
  */
 function onclick_btnEmployNum() {
-    console.info("占用数点击事件");
+	var src = "../templates/WfrmEmployNum.html";
+    window.open(src,'displayContent');
 }
 /**
  * 在住明细 点击事件
  */
 function onclick_btnDetail() {
-    console.info("在住明细点击事件");
+	var src = "../templates/WfrmDetail.html";
+    window.open(src,'displayContent');
 }
 /**
  * 预订情况 点击事件
  */
 function onclick_btnOrderStatus() {
-    console.info("预订情况点击事件");
+	var src = "../templates/WfrmOrderStatus.html";
+    window.open(src,'displayContent');
 }
 /**
  * 关于 点击事件

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间mapper：com.model.professional -->
+<mapper namespace="com.dao.mysql.TCSL_DAO_RoomStatus">
+    <select id="queryById" resultType="com.vo.TCSL_VO_RoomStatus">
+        SELECT
+            *
+        FROM
+            HTO_UPDATE_ROOMSTATE
+        WHERE
+            shopid = #{SHOPID}
+        AND ROOMTYPE != '会议室'
+        ORDER BY
+            ROOMNAME
+    </select>
+    <select id="queryRoomCount" resultType="com.vo.TCSL_VO_RoomStatus">
+        SELECT
+            ROOMSTATE,
+            COUNT(*) COUNT
+        FROM
+            HTO_UPDATE_ROOMSTATE
+        WHERE
+            shopid = #{SHOPID}
+        AND ROOMTYPE != '会议室'
+        GROUP BY ROOMSTATE
+        ORDER BY
+            ROOMNAME
+    </select>
+    <select id="queryAvgRoomPrice" resultType="BigDecimal">
+        SELECT
+            avg(mMoney)
+        FROM
+            HTO_UPDATE_BUSSDATA b
+        WHERE
+            b.dtYyr = #{DATE}
+        AND shopid = #{SHOPID}
+        AND cName = '平均房价'
+    </select>
+    <select id="queryCheckInPercent" resultType="BigDecimal">
+        SELECT
+            mMoney
+        FROM
+            HTO_UPDATE_BUSSDATA b
+        WHERE
+            b.dtYyr = #{DATE}
+        AND shopid = #{SHOPID}
+        AND cName = '房间出租率'
+    </select>
+</mapper>

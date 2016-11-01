@@ -2,6 +2,7 @@ var shopId;
 var menuId;
 $(function(){
 	window.parent.hideCanlender();
+	$('#menuTitle', window.parent.document).html("经营指标对比");
 	shopId = getCookie("shopId");
 	//按钮绑定点击事件
 	$("button").on('click',function(e){
