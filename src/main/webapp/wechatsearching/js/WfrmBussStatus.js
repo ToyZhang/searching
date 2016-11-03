@@ -1,6 +1,7 @@
 $(function(){
 	$('#menuTitle', window.parent.document).html("营业情况汇总");
 	window.parent.hideCanlender();
+	window.parent.hideBtnRepair();
 	var startDate = new Date(new Date().getTime() - 24 * 60 * 60 * 1000).toLocaleDateString();
     var endDate = new Date().toLocaleDateString();
     var $alert = $('#my-alert');
@@ -96,6 +97,9 @@ function createBusStatusItem(busStatusList){
 	var totalPrice = 0;
 	for(var i=0; i<busStatusList.length; i++){
 		var name = busStatusList[i].name;
+		if(name == "预授权"){
+			continue;
+		}
 		var price = busStatusList[i].price - 0;
 		totalPrice = totalPrice + price;
 		var itemTr = document.createElement("tr");
@@ -134,6 +138,9 @@ function createCloseDetailItem(closeDetailList){
 	var totalPrice = 0;
 	for(var i=0; i<closeDetailList.length; i++){
 		var name = closeDetailList[i].name;
+		if(name == "预授权"){
+			continue;
+		}
 		var price = closeDetailList[i].price - 0;
 		totalPrice = totalPrice + price;
 		var itemTr = document.createElement("tr");
@@ -171,6 +178,9 @@ function createSaleItem(itemSaleList){
 	var totalPrice = 0;
 	for(var i=0; i<itemSaleList.length; i++){
 		var name = itemSaleList[i].name;
+		if(name == "预授权"){
+			continue;
+		}
 		var price = itemSaleList[i].price - 0;
 		totalPrice = totalPrice + price;
 		var itemTr = document.createElement("tr");
@@ -208,6 +218,9 @@ function createCollectDetailItem(collectDetailList){
 	var totalPrice = 0;
 	for(var i=0; i<collectDetailList.length; i++){
 		var name = collectDetailList[i].name;
+		if(name == "预授权"){
+			continue;
+		}
 		var price = collectDetailList[i].price - 0;
 		totalPrice = totalPrice + price;
 		var itemTr = document.createElement("tr");
@@ -244,6 +257,9 @@ function createBussTargetItem(busTargetList){
 	$("#myTable").append(tr);
 	for(var i=0; i<busTargetList.length; i++){
 		var name = busTargetList[i].name;
+		if(name == "预授权"){
+			continue;
+		}
 		var data;
 		if(name == "售房数"){
 			data = busTargetList[i].num;

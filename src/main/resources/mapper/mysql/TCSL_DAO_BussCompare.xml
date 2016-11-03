@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间mapper：com.model.professional -->
+<mapper namespace="com.dao.mysql.TCSL_DAO_BussCompare">
+    <select id="queryById" resultType="BigDecimal">
+        SELECT
+            SUM(mMoney) PRICE
+        FROM
+            HTO_UPDATE_BUSSDATA
+        WHERE
+            cID = '1-1'
+        AND dtYyr BETWEEN #{STARTDATE}
+        AND #{ENDDATE}
+        AND shopid = #{SHOPID}
+        GROUP BY
+            cname
+    </select>
+</mapper>

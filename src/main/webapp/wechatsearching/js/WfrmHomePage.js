@@ -1,5 +1,6 @@
 $(function(){
 	window.parent.showCanlender();
+	window.parent.hideBtnRepair();
     $('#menuTitle', window.parent.document).html("首页");
     //初始化营业时间
     var startDate = new Date().toLocaleDateString();
@@ -219,7 +220,7 @@ function createCheckInPercent(checkInPercent){
 			};					
 
 		var optionruzhulv = {
-         tooltip: {					           
+     			tooltip: {					           
 		        },
                 calculable: false,
 				title: {
@@ -251,7 +252,7 @@ function createCheckInPercent(checkInPercent){
 						name: '入住率'
 					}, {
 						value: 100-parseInt(checkInPercent),
-						
+						name: '未入住率',
 						itemStyle: placeHolderStyle
 					}]
 				}]

@@ -48,12 +48,13 @@ public class TCSL_BO_RoomStatus {
         }
         //查询当日的平均房价
         Date date = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-d");
         String dateStr = format.format(date);
-        BigDecimal avgPrice = daoRoomStatus.queryAvgRoomPrice(shopId,dateStr);
+        dateStr = "2015-08-25";
+        BigDecimal avgPrice = daoRoomStatus.queryAvgRoomPrice("8576",dateStr);
         roomData.setAvgRoomPrice(avgPrice);
         //查询当日的入住率
-        BigDecimal checkInPercent = daoRoomStatus.queryCheckInPercent(shopId,dateStr);
+        BigDecimal checkInPercent = daoRoomStatus.queryCheckInPercent("8576",dateStr);
         if(checkInPercent != null){
             checkInPercent = checkInPercent.multiply(new BigDecimal(100));
         }

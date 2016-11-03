@@ -3,6 +3,7 @@ var scope; //查询天数范围
 var menuId; //点击菜单Id
 $(function(){
 	window.parent.hideCanlender();
+	window.parent.hideBtnRepair();
 	$('#menuTitle', window.parent.document).html("经营指标走势");
 	shopId = getCookie("shopId");
 	//绑定按钮点击事件

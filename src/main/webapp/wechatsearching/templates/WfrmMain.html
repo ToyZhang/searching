@@ -48,12 +48,13 @@
 	    		<a class="" id="menuTitle"></a>
 	  		</h1>
 			<div class="am-header-left am-header-nav" id="topLeftMenu">
-				<a href="#left-link" class="" onclick="onclick_btnRefresh()">
+				<a class="" onclick="onclick_btnRefresh()">
 					<i class="am-icon-refresh  am-header-icon" id="btnRefresh"></i>
 				</a>
                 <a id="my-start" href="#phone-link" class="">
                     <i class="am-header-icon am-icon-calendar"></i>
                 </a>
+                <button id="btnRepair" class="am-btn am-btn-primary am-round" onclick="onlcick_btnRepair()">维修</button>
 			</div>
 		</header>
 		<nav data-am-widget="menu" class="am-menu  am-menu-offcanvas1" data-am-menu-offcanvas>
@@ -78,6 +79,9 @@
 							<ul class="am-menu-sub am-collapse  am-avg-sm-1 ">
 								<li class="homePage_btn" onclick="onclick_btnBusStatus()">
 									<a class="">营业情况汇总</a>
+								</li>
+								<li class="homePage_btn" onclick="onclick_btnBussCompare()">
+									<a class="">营收对比情况</a>
 								</li>
 								<li class="homePage_btn" onclick="onclick_btnBITrend()">
 									<a class="">经营指标走势</a>

@@ -1,6 +1,7 @@
 var shopId;
 $(function(){
 	window.parent.hideCanlender();
+	window.parent.hideBtnRepair();
 	$('#menuTitle', window.parent.document).html("在住明细");
 	shopId = getCookie("shopId");
 	init();
@@ -25,7 +26,6 @@ function init(){
         //成功返回后调用函数
         success:function(data){
             if(data.ret == 0){
-            	debugger;
             	var content = data.content;
             	for(var i=0;i<content.length;i++){
             		createItem(content[i]);

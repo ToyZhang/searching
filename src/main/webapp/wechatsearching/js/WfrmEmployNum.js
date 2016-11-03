@@ -1,6 +1,7 @@
 var shopId;
 $(function(){
 	window.parent.hideCanlender();
+	window.parent.hideBtnRepair();
 	$('#menuTitle', window.parent.document).html("房间占用数");
 	shopId = getCookie("shopId");
 	init();

@@ -78,12 +78,43 @@ function onclick_btnOrderStatus() {
  * 关于 点击事件
  */
 function onclick_btnAbout() {
-    console.info("关于 点击事件");
+	var src = "../templates/WfrmAbout.html";
+    window.open(src,'displayContent');
 }
+/**
+ * 显示日期选项
+ */
 function showCanlender(){
 	$("#my-start").show();
 }
+/**
+ * 隐藏日期选项
+ */
 function hideCanlender(){
 	$("#my-start").hide();
 }
-
+/**
+ * 显示维修按钮点击事件
+ */
+function onlcick_btnRepair(){
+	displayContent.window.changeDisplayStatus();
+}
+/**
+ * 显示维修按钮
+ */
+function showBtnRepair(){
+	$("#btnRepair").show();
+}
+/**
+ * 隐藏维修按钮
+ */
+function hideBtnRepair(){
+	$("#btnRepair").hide();
+}
+/**
+ * 营收对比情况点击事件
+ */
+function onclick_btnBussCompare(){
+	var src = "../templates/WfrmBussCompare.html";
+    window.open(src,'displayContent');
+}

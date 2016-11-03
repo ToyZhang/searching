@@ -1,13 +1,22 @@
 var shopId;
 var tr; //房态图列表行
+var btnDisplayRepair = true; //显示维修按钮状态    true  false
+var index;
 $(function(){
 	window.parent.hideCanlender();
+	window.parent.showBtnRepair();
 	$('#menuTitle', window.parent.document).html("实时房态");
 	shopId = getCookie("shopId");
     init();
 })
 function init(){
+	if(btnDisplayRepair == true){
+		$('#btnRepair', window.parent.document).attr("class","am-btn am-btn-success am-round");
+	}else{
+		$('#btnRepair', window.parent.document).attr("class","am-btn am-btn-default am-round");
+	}
 	var requestPath = getRequestPath();
+	//TODO 测试数据
 	shopId = "1221";
 	$.ajax({
         //请求方式
@@ -31,16 +40,16 @@ function init(){
             	var dirtyRoomCount = content.dirtyRoomCount; //脏房数量
             	var useRoomCount = content.useRoomCount; //占用房数量
             	var repairRoomCount = content.repairRoomCount; //维修房数量
-            	if(cleanRoomCount != null || cleanRoomCount != "" || cleanRoomCount !== undefined){
+            	if(cleanRoomCount != null && cleanRoomCount != "" && cleanRoomCount !== undefined){
             		$("#cleanRoomCount").html("净/"+cleanRoomCount);
             	}
-            	if(dirtyRoomCount != null || dirtyRoomCount != "" || dirtyRoomCount !== undefined){
+            	if(dirtyRoomCount != null && dirtyRoomCount != "" && dirtyRoomCount !== undefined){
             		$("#dirtyRoomCount").html("脏/"+dirtyRoomCount);
             	}
-            	if(useRoomCount != null || useRoomCount != "" || useRoomCount !== undefined){
+            	if(useRoomCount != null && useRoomCount != "" && useRoomCount !== undefined){
             		$("#useRoomCount").html("占用/"+useRoomCount);
             	}
-            	if(repairRoomCount != null || repairRoomCount != "" || repairRoomCount !== undefined){
+            	if(repairRoomCount != null && repairRoomCount != "" && repairRoomCount !== undefined){
             		$("#repairRoomCount").html("维修/"+repairRoomCount);
             	}
             	//初始化仪表盘数据
@@ -49,11 +58,19 @@ function init(){
             	if(priceValue != null && percentValue != null){
             		freshGaugeChart(priceValue,percentValue);
             	}
+            	//清空房态表
+            	$("#table1").children().remove();
+            	index = 0;
             	//初始化房态图表
             	var roomList = content.roomStatusList;
-            	for(var i=0;i<roomList.length;i++){
+            	for(i=0; i<roomList.length; i++){
             		var room = roomList[i];
-            		createRoomItem(i,room);
+            		var roomState = room.roomstate;
+            		//过滤维修房
+            		if(roomState == "维修" && btnDisplayRepair == false){
+						continue;
+					}
+            		createRoomItem(room);
             	}
             }
             //绑定表格内容鼠标悬浮事件
@@ -72,20 +89,18 @@ function init(){
 }
 /**
  * 创建房态图表
- * @param {Object} i 房间标号
  * @param {Object} room 房间信息
  */
-function createRoomItem(i,room){
-	debugger;
-	if(i == 0 || i%6 == 0){
+function createRoomItem(room){
+	var roomName = room.roomname;
+	var roomState = room.roomstate;
+	var roomType = room.roomtype;
+	if(index == 0 || index%6 == 0){
 		tr = document.createElement("tr");
 		tr.className = "am-sm-only-text-center";
 		tr.style = "height: 35px;vertical-align:middle;margin:5px;padding:10px;";
 		$("#table1").append(tr);
 	}
-	var roomName = room.roomname;
-	var roomState = room.roomstate;
-	var roomType = room.roomtype;
 	var td = document.createElement("td");
 	td.colSpan = '2';
 	td.setAttribute("name",roomType);
@@ -107,6 +122,7 @@ function createRoomItem(i,room){
 		td.style = "height: 35px;vertical-align:middle;border:2px solid;";
 	}
 	tr.appendChild(td);
+	index = index + 1;
 }
 /**
  * 刷新仪表盘数据
@@ -116,7 +132,7 @@ function createRoomItem(i,room){
 function freshGaugeChart(priceValue,percentValue){
 	require.config({
         paths: {
-            echarts: 'http://echarts.baidu.com/build/dist'
+            echarts: '../api/Echart/dist'
         }
     });
     require(
@@ -188,7 +204,7 @@ function freshGaugeChart(priceValue,percentValue){
 					},
 					data: [{
 						value: percentValue,
-						name: '入住率'
+						name: '%'
 					}]
 				}, {
 					name: '平均房价',
@@ -239,7 +255,7 @@ function freshGaugeChart(priceValue,percentValue){
 					},
 					data: [{
 						value: priceValue,
-						name: '平均房价'
+						name: ''
 					}]
 				}]
 			};
@@ -256,4 +272,20 @@ function freshGaugeChart(priceValue,percentValue){
  */
 function refresh(){
     window.location.reload();
+}
+/**
+ * 刷新显示内容   显示维修房/不显示维修房
+ */
+function changeDisplayStatus(){
+	if(btnDisplayRepair == true){  //显示  -> 不显示
+		btnDisplayRepair = false;
+		$("#repairRoomCount").hide();
+		init();
+		$('#btnRepair', window.parent.document).attr("class","am-btn am-btn-default am-round");
+	}else{ //不显示 ->显示
+		btnDisplayRepair = true;
+		$("#repairRoomCount").show();
+		init();
+		$('#btnRepair', window.parent.document).attr("class","am-btn am-btn-success am-round");
+	}
 }
