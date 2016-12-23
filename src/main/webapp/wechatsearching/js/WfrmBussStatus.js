@@ -31,16 +31,16 @@ function init(startDate,endDate){
 	startDate = dateFormat(startDate);
 	endDate = dateFormat(endDate);
 	var shopId = getCookie("shopId");
-	//TODO 假数据写死
-	shopId = "8576";
-	startDate = "2015-08-19";
-	endDate = "2015-08-25";
+//	//TODO 假数据写死
+//	shopId = "8576";
+//	startDate = "2015-08-19";
+//	endDate = "2015-08-25";
 	var requestPath = getRequestPath();
 	$.ajax({
         //请求方式
         type:"post",
         //请求路径
-        url:requestPath+'bussStatus/queryById',
+        url:requestPath+RESOURCE_PROJECT_NAME+'bussStatus/queryById',
         //是否异步请求
         async:true,
         //传参
@@ -57,7 +57,7 @@ function init(startDate,endDate){
             	$("#myTable").children().remove();
             	var content = data.content;
             	var busStatusList = content.busStatusList;
-            	var a = busStatusList.length;
+//          	var a = busStatusList.length;
             	if(busStatusList != null && busStatusList.length > 0){
             		createBusStatusItem(busStatusList);
             	}

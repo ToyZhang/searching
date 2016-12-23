@@ -42,13 +42,13 @@ public class TCSL_BO_BussStatus {
         TCSL_VO_BusinessData saleRoomData = new TCSL_VO_BusinessData();
         saleRoomData.setNAME("售房数");
         saleRoomData.setNUM(saleRoomNum);
-        bussTargetList.add(saleRoomData);
+
         //获取营业指标--平均房价
         BigDecimal avgRoomPrice = daoBussStatus.queryAvgRoomPrice(shopId,startDate,endDate);
         TCSL_VO_BusinessData avgRoomPriceData = new TCSL_VO_BusinessData();
         avgRoomPriceData.setNAME("平均房价");
         avgRoomPriceData.setPRICE(avgRoomPrice);
-        bussTargetList.add(avgRoomPriceData);
+
         //获取营业指标--入住率
         List<BigDecimal> totalRoomList = new ArrayList<BigDecimal>(); //该时间段每天房间总数
         List<BigDecimal> checkInNum = daoBussStatus.queryCheckInNum(shopId,startDate,endDate); //查询该时间段每天入住数
@@ -66,12 +66,22 @@ public class TCSL_BO_BussStatus {
         for(int i=0; i<totalRoomList.size(); i++){
             totalRoomNum = totalRoomNum.add(totalRoomList.get(i));
         }
-        BigDecimal checkInPercent = checkInTotal.divide(totalRoomNum,2, RoundingMode.HALF_UP);
+        //判断总房数是否为0
+        BigDecimal checkInPercent = new BigDecimal(0.00);
+        Boolean compareResult = (totalRoomNum.compareTo(BigDecimal.ZERO) == 0); //true 总房数为0  false 总房数不为0
+        if(!compareResult){ //总房数不为0
+            checkInPercent = checkInTotal.divide(totalRoomNum,2, RoundingMode.HALF_UP);
+        }
         TCSL_VO_BusinessData checkInData = new TCSL_VO_BusinessData();
         checkInData.setNAME("入住率");
         checkInData.setMMONEY((checkInPercent.multiply(new BigDecimal(100)))+"%");
         bussTargetList.add(checkInData);
-        businessData.setBusTargetList(bussTargetList);
+        //售房数不为null，平均房价不为null，总房数不为0
+        if((saleRoomData.getNUM() != null) && (avgRoomPrice != null) && (compareResult == false)){
+            bussTargetList.add(saleRoomData);
+            bussTargetList.add(avgRoomPriceData);
+            businessData.setBusTargetList(bussTargetList);
+        }
         result.setRet(0);
         result.setContent(businessData);
         return result;

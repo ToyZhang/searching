@@ -31,23 +31,18 @@ public interface TCSL_DAO_RoomStatus {
     /**
      * 查询当日平均房价
      * @param shopId
-     * @param date
      * @return
      */
     BigDecimal queryAvgRoomPrice(
-        @Param("SHOPID") String shopId,
-        @Param("DATE") String date
+        @Param("SHOPID") String shopId
     );
 
     /**
      * 查询当日入住率
-     * @param shopId
-     * @param date
      * @return
      */
     BigDecimal queryCheckInPercent(
-        @Param("SHOPID") String shopId,
-        @Param("DATE") String date
+
     );
 
 }

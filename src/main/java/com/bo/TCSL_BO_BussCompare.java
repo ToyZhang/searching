@@ -34,14 +34,14 @@ public class TCSL_BO_BussCompare {
         SimpleDateFormat fm = new SimpleDateFormat("YYYY");
         Date now = new Date();
         String currentYear = fm.format(now);
-        currentYear = "2015";
+//        currentYear = "2015"; //测试使用
         //获取系统时间前一年时间
         Calendar curr = Calendar.getInstance();
         curr.setTime(now);
         curr.add(Calendar.YEAR,-1);
         Date lastDate = curr.getTime();
         String lastYear = fm.format(lastDate);
-        lastYear = "2014";
+//        lastYear = "2014"; //测试使用
         //获取一月营业额
         startDate = currentYear + "-01-01";
         endDate = currentYear + "-01-31";

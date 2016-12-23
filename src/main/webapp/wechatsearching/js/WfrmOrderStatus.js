@@ -8,13 +8,13 @@ $(function(){
 })
 function init(){
 	var requestPath = getRequestPath();
-	//TODO 测试数据
-	shopId = "1221";
+//	//TODO 测试数据
+//	shopId = "1221";
 	$.ajax({
         //请求方式
         type:"post",
         //请求路径
-        url:requestPath+'orderStatus/queryById',
+        url:requestPath+RESOURCE_PROJECT_NAME+'orderStatus/queryById',
         //是否异步请求
         async:true,
         //传参
@@ -27,21 +27,23 @@ function init(){
         success:function(data){
             if(data.ret == 0){
             	var content = data.content;
-				var valueArr = [];
-				var dateArr = [];
-            	for(var i=0;i<content.length;i++){
-            		var count = content[i].count - 0;
-            		var date = content[i].date.split(" ")[0];
-            		valueArr.push(count);
-            		if(i == 0){
-            			dateArr.push('占位');
-            		}
-            		dateArr.push(date);
-            		if(i == content.length-1){
-            			dateArr.push('占位');
-            		}
+            	if(content != null && content != "" && content !== undefined){
+            		var valueArr = [];
+					var dateArr = [];
+	            	for(var i=0;i<content.length;i++){
+	            		var count = content[i].count - 0;
+	            		var date = content[i].date.split(" ")[0];
+	            		valueArr.push(count);
+	            		if(i == 0){
+	            			dateArr.push('占位');
+	            		}
+	            		dateArr.push(date);
+	            		if(i == content.length-1){
+	            			dateArr.push('占位');
+	            		}
+	            	}
+	            	freshChart(valueArr,dateArr);
             	}
-            	freshChart(valueArr,dateArr);
             }
         },
         //调用出错执行的函数

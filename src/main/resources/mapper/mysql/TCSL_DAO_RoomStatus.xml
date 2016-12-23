@@ -29,22 +29,33 @@
     </select>
     <select id="queryAvgRoomPrice" resultType="BigDecimal">
         SELECT
-            avg(mMoney)
-        FROM
-            HTO_UPDATE_BUSSDATA b
-        WHERE
-            b.dtYyr = #{DATE}
-        AND shopid = #{SHOPID}
-        AND cName = '平均房价'
+            ROUND(
+                (
+                    SELECT
+                        AVG(MPRICE)
+                    FROM
+                        hto_update_account
+                    WHERE
+                        SHOPID = #{SHOPID}
+                ),
+                2
+            )
     </select>
     <select id="queryCheckInPercent" resultType="BigDecimal">
-        SELECT
-            mMoney
-        FROM
-            HTO_UPDATE_BUSSDATA b
-        WHERE
-            b.dtYyr = #{DATE}
-        AND shopid = #{SHOPID}
-        AND cName = '房间出租率'
+        SELECT TRUNCATE(
+        (
+            SELECT
+                COUNT(*)
+            FROM
+                hto_update_roomstate
+            WHERE
+                ROOMSTATE = '占用'
+        )/(
+            SELECT
+                COUNT(*)
+            FROM
+                hto_update_roomstate
+        ),2
+        )
     </select>
 </mapper>

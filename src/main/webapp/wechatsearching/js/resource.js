@@ -1,0 +1,2 @@
+//工程名
+var RESOURCE_PROJECT_NAME = "";

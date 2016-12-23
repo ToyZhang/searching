@@ -73,3 +73,18 @@ function dateFormat(strTime){
 	var date = new Date(strTime);
     return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
 }
+/**
+ * 获取当天日期的前几天/后几天
+ * @param {Object} AddDayCount 时间间隔(天)
+ */
+function getDate(AddDayCount){
+	var dd = new Date(); 
+	dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期
+	var y = dd.getFullYear(); 
+	var m = dd.getMonth()+1;//获取当前月份的日期 
+	var d = dd.getDate() - 0; 
+	if(d < 10){
+		d = "0"+d;
+	}
+	return y+"-"+m+"-"+d; 
+}

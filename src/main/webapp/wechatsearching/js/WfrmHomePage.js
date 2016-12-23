@@ -3,7 +3,7 @@ $(function(){
 	window.parent.hideBtnRepair();
     $('#menuTitle', window.parent.document).html("首页");
     //初始化营业时间
-    var startDate = new Date().toLocaleDateString();
+    var startDate = getDate(-1);
     $('#dataDate').text(startDate);
     //初始化门店名称
     var shopName = getCookie("shopName");
@@ -13,15 +13,15 @@ $(function(){
 
 function init(date){
 	var shopId = getCookie("shopId");
-	//TODO 假数据写死
-	shopId = "8576";
-	date = "2015-08-25";
+//	//TODO 假数据写死
+//	shopId = "8576";
+//	date = "2015-08-25";
 	var requestPath = getRequestPath();
 	$.ajax({
         //请求方式
         type:"post",
         //请求路径
-        url:requestPath+'homePage/queryById',
+        url:requestPath+RESOURCE_PROJECT_NAME+'homePage/queryById',
         //是否异步请求
         async:true,
         //传参
@@ -65,6 +65,9 @@ function onchange_date(date) {
  * @param {Object} avgPrice 平均房价
  */
 function createAvgPriceItem(avgPrice){
+	if(avgPrice == null || avgPrice == "" || avgPrice === undefined){
+		avgPrice = 0;
+	}
 	// 路径配置
     require.config({
         paths: {

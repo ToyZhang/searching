@@ -32,7 +32,6 @@ $(function(){
 				init();
 				return;
 		}
-		console.info("点击菜单",id);
 	});
 	//初始化显示营业额数据
 	menuId = "myBtnYYE";
@@ -40,15 +39,15 @@ $(function(){
 })
 function init(){
 	var date = (new Date().toLocaleString().split(" "))[0];
-	//TODO 测试数据
-	shopId = "8576";
-	date = "2015-08-25";
+//	//TODO 测试数据
+//	shopId = "8576";
+//	date = "2015-08-25";
 	var requestPath = getRequestPath();
 	$.ajax({
         //请求方式
         type:"post",
         //请求路径
-        url:requestPath+'BICompare/queryBussData',
+        url:requestPath+RESOURCE_PROJECT_NAME+'BICompare/queryBussData',
         //是否异步请求
         async:true,
         //传参

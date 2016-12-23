@@ -8,13 +8,13 @@ $(function(){
 })
 function init(){
 	var requestPath = getRequestPath();
-	//TODO 测试数据
-	shopId = "1221";
+//	//TODO 测试数据
+//	shopId = "1221";
 	$.ajax({
         //请求方式
         type:"post",
         //请求路径
-        url:requestPath+'employNum/queryById',
+        url:requestPath+RESOURCE_PROJECT_NAME+'employNum/queryById',
         //是否异步请求
         async:true,
         //传参

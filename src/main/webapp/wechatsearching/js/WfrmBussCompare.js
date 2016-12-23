@@ -8,13 +8,13 @@ $(function(){
 })
 function init(){
 	var requestPath = getRequestPath();
-	//TODO 测试数据
-	shopId = "8576";
+//	//TODO 测试数据
+//	shopId = "8576";
 	$.ajax({
         //请求方式
         type:"post",
         //请求路径
-        url:requestPath+'bussCompare/queryById',
+        url:requestPath+RESOURCE_PROJECT_NAME+'bussCompare/queryById',
         //是否异步请求
         async:true,
         //传参

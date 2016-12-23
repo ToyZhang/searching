@@ -63,15 +63,15 @@ $(function(){
 })
 function init(){
 	var date = (new Date().toLocaleString().split(" "))[0];
-	//TODO 测试数据
-	shopId = "8576";
-	date = "2015-08-25";
+//	//TODO 测试数据
+//	shopId = "8576";
+//	date = "2015-08-25";
 	var requestPath = getRequestPath();
 	$.ajax({
         //请求方式
         type:"post",
         //请求路径
-        url:requestPath+'BITrend/queryBussData',
+        url:requestPath+RESOURCE_PROJECT_NAME+'BITrend/queryBussData',
         //是否异步请求
         async:true,
         //传参

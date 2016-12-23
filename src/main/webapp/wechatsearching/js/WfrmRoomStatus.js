@@ -16,13 +16,13 @@ function init(){
 		$('#btnRepair', window.parent.document).attr("class","am-btn am-btn-default am-round");
 	}
 	var requestPath = getRequestPath();
-	//TODO 测试数据
-	shopId = "1221";
+//	//TODO 测试数据
+//	shopId = "1221";
 	$.ajax({
         //请求方式
         type:"post",
         //请求路径
-        url:requestPath+'roomStatus/queryById',
+        url:requestPath+RESOURCE_PROJECT_NAME+'roomStatus/queryById',
         //是否异步请求
         async:true,
         //传参
@@ -42,20 +42,32 @@ function init(){
             	var repairRoomCount = content.repairRoomCount; //维修房数量
             	if(cleanRoomCount != null && cleanRoomCount != "" && cleanRoomCount !== undefined){
             		$("#cleanRoomCount").html("净/"+cleanRoomCount);
+            	}else{
+            		$("#cleanRoomCount").html("净/0");
             	}
             	if(dirtyRoomCount != null && dirtyRoomCount != "" && dirtyRoomCount !== undefined){
             		$("#dirtyRoomCount").html("脏/"+dirtyRoomCount);
+            	}else{
+            		$("#dirtyRoomCount").html("脏/0");
             	}
             	if(useRoomCount != null && useRoomCount != "" && useRoomCount !== undefined){
             		$("#useRoomCount").html("占用/"+useRoomCount);
+            	}else{
+            		$("#useRoomCount").html("占用/0");
             	}
             	if(repairRoomCount != null && repairRoomCount != "" && repairRoomCount !== undefined){
             		$("#repairRoomCount").html("维修/"+repairRoomCount);
+            	}else{
+            		$("#repairRoomCount").html("维修/0");
             	}
             	//初始化仪表盘数据
             	var priceValue = content.avgRoomPrice;
             	var percentValue = content.checkInPercent;
             	if(priceValue != null && percentValue != null){
+            		freshGaugeChart(priceValue,percentValue);
+            	}else{
+            		priceValue = 0;
+            		percentValue = 0;
             		freshGaugeChart(priceValue,percentValue);
             	}
             	//清空房态表

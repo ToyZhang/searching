@@ -8,8 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -47,14 +45,11 @@ public class TCSL_BO_RoomStatus {
             }
         }
         //查询当日的平均房价
-        Date date = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-d");
-        String dateStr = format.format(date);
-        dateStr = "2015-08-25";
-        BigDecimal avgPrice = daoRoomStatus.queryAvgRoomPrice("8576",dateStr);
+//        dateStr = "2015-08-25";
+        BigDecimal avgPrice = daoRoomStatus.queryAvgRoomPrice(shopId);//"8576"
         roomData.setAvgRoomPrice(avgPrice);
         //查询当日的入住率
-        BigDecimal checkInPercent = daoRoomStatus.queryCheckInPercent("8576",dateStr);
+        BigDecimal checkInPercent = daoRoomStatus.queryCheckInPercent();//"8576"
         if(checkInPercent != null){
             checkInPercent = checkInPercent.multiply(new BigDecimal(100));
         }

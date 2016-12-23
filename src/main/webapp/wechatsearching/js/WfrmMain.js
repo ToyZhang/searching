@@ -22,6 +22,7 @@ function onclick_btnHomePage() {
 	$('#my-start').datepicker().on('changeDate.datepicker.amui', function (event) {
         onclick_date();
     });
+    $('.am-offcanvas').click();//使菜单栏隐藏
     var src = "../templates/WfrmHomePage.html";
     window.open(src,'displayContent');
 }
@@ -29,6 +30,7 @@ function onclick_btnHomePage() {
  * 营业情况汇总 点击事件
  */
 function  onclick_btnBusStatus() {
+	$('.am-offcanvas').click();//使菜单栏隐藏
     var src = "../templates/WfrmBussStatus.html";
     window.open(src,'displayContent');
 }
@@ -36,6 +38,7 @@ function  onclick_btnBusStatus() {
  * 营业指标走势 点击事件
  */
 function onclick_btnBITrend() {
+	$('.am-offcanvas').click();//使菜单栏隐藏
 	var src = "../templates/WfrmBITrend.html";
     window.open(src,'displayContent');
 }
@@ -43,6 +46,7 @@ function onclick_btnBITrend() {
  * 营业指标对比 点击事件
  */
 function onclick_btnBICompare() {
+	$('.am-offcanvas').click();//使菜单栏隐藏
 	var src = "../templates/WfrmBICompare.html";
     window.open(src,'displayContent');
 }
@@ -50,6 +54,7 @@ function onclick_btnBICompare() {
  * 实时房态 点击事件
  */
 function onclick_btnRoomStatus() {
+	$('.am-offcanvas').click();//使菜单栏隐藏
 	var src = "../templates/WfrmRoomStatus.html";
     window.open(src,'displayContent');
 }
@@ -57,6 +62,7 @@ function onclick_btnRoomStatus() {
  * 占用数 点击事件
  */
 function onclick_btnEmployNum() {
+	$('.am-offcanvas').click();//使菜单栏隐藏
 	var src = "../templates/WfrmEmployNum.html";
     window.open(src,'displayContent');
 }
@@ -64,6 +70,7 @@ function onclick_btnEmployNum() {
  * 在住明细 点击事件
  */
 function onclick_btnDetail() {
+	$('.am-offcanvas').click();//使菜单栏隐藏
 	var src = "../templates/WfrmDetail.html";
     window.open(src,'displayContent');
 }
@@ -71,6 +78,7 @@ function onclick_btnDetail() {
  * 预订情况 点击事件
  */
 function onclick_btnOrderStatus() {
+	$('.am-offcanvas').click();//使菜单栏隐藏
 	var src = "../templates/WfrmOrderStatus.html";
     window.open(src,'displayContent');
 }
@@ -78,6 +86,7 @@ function onclick_btnOrderStatus() {
  * 关于 点击事件
  */
 function onclick_btnAbout() {
+	$('.am-offcanvas').click();//使菜单栏隐藏
 	var src = "../templates/WfrmAbout.html";
     window.open(src,'displayContent');
 }
@@ -115,6 +124,7 @@ function hideBtnRepair(){
  * 营收对比情况点击事件
  */
 function onclick_btnBussCompare(){
+	$('.am-offcanvas').click();//使菜单栏隐藏
 	var src = "../templates/WfrmBussCompare.html";
     window.open(src,'displayContent');
 }
