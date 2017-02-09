@@ -64,7 +64,7 @@ $(function(){
 function init(){
 	var date = (new Date().toLocaleString().split(" "))[0];
 //	//TODO 测试数据
-//	shopId = "8576";
+// 	shopId = "8576"; //本地库测试使用
 //	date = "2015-08-25";
 	var requestPath = getRequestPath();
 	$.ajax({
@@ -109,6 +109,26 @@ function init(){
  * @param {Object} dateArr
  */
 function refreshChart(valueArr,dateArr){
+	var unitFront; //单位前
+	var unitBack; //单位后
+	var des; //描述
+	switch (menuId){
+		case "myBtnYYE":
+            unitFront = "¥";
+            unitBack = "";
+            des = "收入";
+			break;
+		case "myBtnPJFJ":
+            unitFront = "¥";
+            unitBack = "";
+            des = "收入";
+			break;
+		case "myBtnSFS":
+            unitFront = "";
+            unitBack = "间";
+            des = "售出";
+            break;
+	}
 	// 路径配置
     require.config({
         paths: {
@@ -159,7 +179,7 @@ function refreshChart(valueArr,dateArr){
 			                color: '#87cefa',
 			                show: true,
 			                position: 'right',
-			                formatter: '￥{c}'
+			                formatter: unitFront+'{c}'+unitBack
 			            }
 			        }
 			    };
@@ -179,7 +199,7 @@ function refreshChart(valueArr,dateArr){
 					            axisPointer: { // 坐标轴指示器，坐标轴触发有效
 					                type: 'line' // 默认为直线，可选为：'line' | 'shadow'
 					            },
-					            formatter: '{b}<br/>{a0}:￥{c0}<br/>'
+					            formatter: '{b}<br/>{a0}:'+unitFront+'{c0}'+unitBack+'<br/>'
 					        },
 					        xAxis: [{
 					            show: false,
@@ -200,7 +220,7 @@ function refreshChart(valueArr,dateArr){
 					            data: dateArr
 					        }],
 					        series: [{
-					            name: '收入',
+					            name: des,
 					            type: 'bar',
 					            stack: '总量',
 					            itemStyle: dataStyle,
